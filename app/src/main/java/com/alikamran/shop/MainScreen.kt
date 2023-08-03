@@ -43,7 +43,7 @@ fun bottomBar(navHostController: NavHostController){
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry ?.destination
 
-    //here we can change background   ,elevation....
+    //here we can change background    ,elevation....
     NavigationBar {
         screens.forEach{screen-> AddItem(
             screen = screen,
