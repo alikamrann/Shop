@@ -43,7 +43,7 @@ fun bottomBar(navHostController: NavHostController){
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry ?.destination
 
-    //here we can change background ,elevation....
+    //here we can change background  ,elevation....
     NavigationBar {
         screens.forEach{screen-> AddItem(
             screen = screen,
@@ -59,7 +59,7 @@ fun RowScope.AddItem(
     currentDestination: NavDestination?,
     navController: NavHostController
 ){
-    //اینجا  میشه   آیتم ها  رو کاستوم کرد
+    //اینجا  میشه    آیتم ها  رو کاستوم کرد
     NavigationBarItem(label = {
         Text(text = screen.title)
     },
