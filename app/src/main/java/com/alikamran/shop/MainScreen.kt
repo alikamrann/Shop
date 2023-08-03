@@ -62,7 +62,7 @@ fun RowScope.AddItem(
     currentDestination: NavDestination?,
     navController: NavHostController
 ){
-    //اینجا میشه آیتم ها رو کاستوم کرد
+    //اینجا  میشه آیتم ها رو کاستوم کرد
     NavigationBarItem(label = {
         Text(text = screen.title)
     },
