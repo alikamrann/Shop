@@ -1,21 +1,39 @@
 package com.alikamran.shop
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItemDefaults.containerColor
+import androidx.compose.material3.ListItemDefaults.contentColor
+import androidx.compose.material3.LocalAbsoluteTonalElevation
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Gray
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.alikamran.shop.boxes.MainSearchBox
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,14 +41,17 @@ import androidx.navigation.compose.rememberNavController
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { bottomBar(navHostController = navController)}
+        bottomBar = { bottomBar(navHostController = navController) },
+
     ) {
+
         BottomNavGraph(navController = navController)
     }
 
 }
+
 @Composable
-fun bottomBar(navHostController: NavHostController){
+fun bottomBar(navHostController: NavHostController) {
 
     val screens = listOf(
         BottomBarScreen.Home,
@@ -41,28 +62,42 @@ fun bottomBar(navHostController: NavHostController){
     )
 
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry ?.destination
+    val currentDestination = navBackStackEntry?.destination
 
     //here we can change background    ,elevation....
-    NavigationBar {
-        screens.forEach{screen-> AddItem(
-            screen = screen,
-            currentDestination = currentDestination,
-            navController = navHostController
-        )}
+    NavigationBar(
+        containerColor = colorResource(id = R.color.white),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp)),
+        tonalElevation = 0.dp
+
+    )
+    {
+        screens.forEach { screen ->
+            AddItem(
+                screen = screen,
+                currentDestination = currentDestination,
+                navController = navHostController
+            )
+
+        }
+
     }
 
 }
+
 @Composable
 fun RowScope.AddItem(
     screen: BottomBarScreen,
     currentDestination: NavDestination?,
     navController: NavHostController
-){
+) {
     //اینجا  میشه    آیتم  ها  رو کاستوم کرد
-    NavigationBarItem(label = {
-        Text(text = screen.title)
-    },
+    NavigationBarItem(
+        label = {
+            Text(text = screen.title)
+        },
         icon = {
             Icon(
                 imageVector = screen.icon,
@@ -78,6 +113,13 @@ fun RowScope.AddItem(
                 popUpTo(navController.graph.findStartDestination().id)
                 launchSingleTop = true
             }
-        }
+        },
+        alwaysShowLabel = false,
+        colors = androidx.compose.material3.NavigationBarItemDefaults
+            .colors(
+                selectedIconColor = Black,
+                indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(LocalAbsoluteTonalElevation.current),
+                unselectedIconColor = Gray
+            )
     )
 }

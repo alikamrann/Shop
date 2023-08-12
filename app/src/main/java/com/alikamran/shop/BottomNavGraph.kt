@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.alikamran.shop.screens.CartScreen
 import com.alikamran.shop.screens.FavoriteScreen
-import com.alikamran.shop.screens.HomeScreen
+import com.alikamran.shop.screens.home.HomeScreen
 import com.alikamran.shop.screens.ProfileScreen
 import com.alikamran.shop.screens.SearchScreen
 

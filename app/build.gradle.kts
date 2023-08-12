@@ -71,4 +71,14 @@ dependencies {
     val nav_version = "2.6.0"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.4.3")
+
+    // Pager
+    implementation ("com.google.accompanist:accompanist-pager:0.28.0")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.28.0")
+    implementation ("androidx.compose.ui:ui-util:1.4.3")
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+
+
 }
